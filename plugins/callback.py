@@ -100,13 +100,6 @@ async def home_cb(c, m):
     await start(c, m, cb=True)
 
 
-@Client.on_callback_query(filters.regex('^done$'))
-async def done_cb(c, m):
-    BATCH.remove(m.from_user.id)
-    c.cancel_listener(m.from_user.id)
-    await m.message.delete()
-
-
 @Client.on_callback_query(filters.regex('^delete'))
 async def delete_cb(c, m):
     await m.answer()
