@@ -5,7 +5,7 @@ from .commands import encode_string
 from pyrogram import Client, filters
 from pyrogram.errors import FloodWait, UserIsBlocked, InputUserDeactivated
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message
-from .commands import BATCH_MESSAGES
+from .commands import BATCH_MESSAGES as BATCH
 from config import *
     
 
@@ -70,7 +70,8 @@ async def storefile(c, m):
 
 @Client.on_message((filters.document|filters.video|filters.audio|filters.photo) & filters.incoming & filters.channel & ~filters.forwarded)
 async def storefile_channel(c, m):
-    if BATCH:
+    user_id = m.from_user.id
+    if BATCH[user_id]:
         return
     if IS_PRIVATE:
         if m.chat.id not in AUTH_USERS:
