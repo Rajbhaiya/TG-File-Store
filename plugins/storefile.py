@@ -12,7 +12,8 @@ from config import *
 #################################### FOR PRIVATE ################################################
 @Client.on_message((filters.document | filters.video | filters.audio | filters.photo) & filters.incoming & ~filters.channel)
 async def storefile(c, m):
-    if BATCH:
+    user_id = m.from_user.id
+    if BATCH[user_id]:
         return
     if IS_PRIVATE:
         if m.from_user.id not in AUTH_USERS:
