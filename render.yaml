@@ -1,0 +1,6 @@
+services:
+  - type: web
+    name: filestore-bot
+    env: docker
+    dockerfilePath: ./Dockerfile
+    startCommand: "bash start.sh"
